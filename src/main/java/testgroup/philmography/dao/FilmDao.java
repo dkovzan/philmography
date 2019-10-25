@@ -9,5 +9,5 @@ public interface FilmDao {
 	void add(Film film);
 	void delete(Film film);
 	void update(Film film);
-	Film getById(int id);
+	Film getById(Long id);
 }

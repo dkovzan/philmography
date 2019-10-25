@@ -44,7 +44,7 @@ public class FilmServiceImpl implements FilmService {
 
 	@Override
 	@Transactional
-	public Film getById(int id) {
+	public Film getById(Long id) {
 		return filmDao.getById(id);
 	}
 }

@@ -9,23 +9,18 @@ public class Film {
 	public Film() {}
 
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-
-	@Column(name = "title")
+	private Long id;
+	
 	private String title;
-
-	@Column(name = "year")
-	private int year;
-
-	@Column(name = "genre")
+	
+	private Integer year;
+	
 	private String genre;
-
-	@Column(name = "watched")
+	
 	private boolean watched;
 
-	public Film(int id, String title, int year, String genre, boolean watched) {
+	public Film(Long id, String title, Integer year, String genre, boolean watched) {
 		this.id = id;
 		this.title = title;
 		this.year = year;
@@ -33,11 +28,11 @@ public class Film {
 		this.watched = watched;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -49,11 +44,11 @@ public class Film {
 		this.title = title;
 	}
 
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 
@@ -82,5 +77,29 @@ public class Film {
 				", genre='" + genre + '\'' +
 				", watched=" + watched +
 				'}';
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		
+		Film film = (Film) o;
+		
+		if (isWatched() != film.isWatched()) return false;
+		if (!getId().equals(film.getId())) return false;
+		if (!getTitle().equals(film.getTitle())) return false;
+		if (getYear() != null ? !getYear().equals(film.getYear()) : film.getYear() != null) return false;
+		return getGenre() != null ? getGenre().equals(film.getGenre()) : film.getGenre() == null;
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = getId().hashCode();
+		result = 31 * result + getTitle().hashCode();
+		result = 31 * result + (getYear() != null ? getYear().hashCode() : 0);
+		result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
+		result = 31 * result + (isWatched() ? 1 : 0);
+		return result;
 	}
 }

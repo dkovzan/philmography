@@ -44,7 +44,7 @@ public class FilmDaoImpl implements FilmDao {
 	}
 
 	@Override
-	public Film getById(int id) {
+	public Film getById(Long id) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(Film.class, id);
 	}
