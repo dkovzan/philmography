@@ -50,7 +50,7 @@ public class AuthenticationController {
 		try {
 			authenticate(username, password);
 		} catch (Exception e) {
-			ResponseEntity.badRequest().body("Username or password are wrong.");
+			return ResponseEntity.badRequest().body("Username or password are wrong.");
 		}
 		
 		final String token = jwtUtils.generateToken(userDetails);

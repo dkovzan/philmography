@@ -21,31 +21,30 @@ public class FilmDaoImpl implements FilmDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Film> getAll() {
-		Session session = sessionFactory.getCurrentSession();
-		return session.createQuery("from Film").list();
+		return getSession().createQuery("from Film").list();
 	}
 
 	@Override
 	public void add(Film film) {
-		Session session = sessionFactory.getCurrentSession();
-		session.persist(film);
+		getSession().persist(film);
 	}
 
 	@Override
 	public void delete(Film film) {
-		Session session = sessionFactory.getCurrentSession();
-		session.delete(film);
+		getSession().delete(film);
 	}
 
 	@Override
 	public void update(Film film) {
-		Session session = sessionFactory.getCurrentSession();
-		session.update(film);
+		getSession().update(film);
 	}
 
 	@Override
 	public Film getById(Long id) {
-		Session session = sessionFactory.getCurrentSession();
-		return session.get(Film.class, id);
+		return getSession().get(Film.class, id);
+	}
+
+	private Session getSession() {
+		return sessionFactory.getCurrentSession();
 	}
 }

@@ -23,39 +23,37 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<User> getAll() {
-		Session session = sessionFactory.getCurrentSession();
-		return session.createQuery("from User").list();
+		return getSession().createQuery("from User").list();
 	}
 	
 	@Override
 	@SuppressWarnings("unchecked")
 	public Optional<UserDetails> getByUsername(String username) {
-		Session session = sessionFactory.getCurrentSession();
-		List<User> users = session.createQuery("from " + User.class.getName() + " where username = :value").setParameter("value", username).list();
+		List<User> users = getSession().createQuery("from " + User.class.getName() + " where username = :value").setParameter("value", username).list();
 		return users.isEmpty() ? Optional.empty() : Optional.of( users.get(0));
 	}
 	
 	@Override
 	public User getById(Long id) {
-		Session session = sessionFactory.getCurrentSession();
-		return session.get(User.class, id);
+		return getSession().get(User.class, id);
 	}
 	
 	@Override
 	public void add(User user) {
-		Session session = sessionFactory.getCurrentSession();
-		session.persist(user);
+		getSession().persist(user);
 	}
 	
 	@Override
 	public void update(User user) {
-		Session session = sessionFactory.getCurrentSession();
-		session.update(user);
+		getSession().update(user);
 	}
 	
 	@Override
 	public void delete(User user) {
-		Session session = sessionFactory.getCurrentSession();
-		session.delete(user);
+		getSession().delete(user);
+	}
+
+	private Session getSession() {
+		return sessionFactory.getCurrentSession();
 	}
 }
