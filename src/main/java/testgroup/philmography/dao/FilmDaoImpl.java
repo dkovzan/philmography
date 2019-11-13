@@ -21,7 +21,7 @@ public class FilmDaoImpl implements FilmDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Film> getAll() {
-		return getSession().createQuery("from Film").list();
+		return getSession().createQuery("from " + Film.class.getName()).list();
 	}
 
 	@Override

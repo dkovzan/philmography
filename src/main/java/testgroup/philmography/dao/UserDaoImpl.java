@@ -23,13 +23,13 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<User> getAll() {
-		return getSession().createQuery("from User").list();
+		return getSession().createQuery("from " + User.class.getName()).list();
 	}
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public Optional<UserDetails> getByUsername(String username) {
-		List<User> users = getSession().createQuery("from " + User.class.getName() + " where username = :value").setParameter("value", username).list();
+	public Optional<UserDetails> getByUsername(String usernameValue) {
+		List<User> users = getSession().createQuery("from " + User.class.getName() + " where username = :value").setParameter("value", usernameValue).list();
 		return users.isEmpty() ? Optional.empty() : Optional.of( users.get(0));
 	}
 	
